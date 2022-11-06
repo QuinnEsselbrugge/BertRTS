@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.994413, 1 )
+colors = PoolColorArray( 0.215686, 0.247059, 0.317647, 1, 0.215686, 0.247059, 0.317647, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[node name="GUI" type="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 244.0
+margin_bottom = 14.0
+
+[node name="SelectedBar" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 240.0
+margin_bottom = 14.0
+
+[node name="Count" type="MarginContainer" parent="HBoxContainer/SelectedBar"]
+margin_right = 240.0
+margin_bottom = 14.0
+
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/SelectedBar/Count"]
+margin_right = 240.0
+margin_bottom = 14.0
+texture = SubResource( 2 )
+
+[node name="SelectedLabel" type="Label" parent="HBoxContainer/SelectedBar/Count"]
+margin_right = 240.0
+margin_bottom = 14.0
+text = "I aint fucking know whats going onyall"
+
+[node name="Counters" type="HBoxContainer" parent="HBoxContainer"]
+margin_left = 244.0
+margin_right = 244.0
+margin_bottom = 14.0

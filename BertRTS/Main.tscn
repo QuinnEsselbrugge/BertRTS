@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://default_env.tres" type="Environment" id=1]
+[ext_resource path="res://WorldLogic/World.gd" type="Script" id=2]
+[ext_resource path="res://PlayerLogic/CameraHolder.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Utils/FPS.gd" type="Script" id=4]
+[ext_resource path="res://Assets/wareHouse.gltf" type="PackedScene" id=5]
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 1 )
+
+[node name="PlayerCamera" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.705512, 0.708697, 0, -0.708697, 0.705512, 0, 21.8075, 16.7564 )
+
+[node name="wareHouse" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.02902, 0, -0.50437, 0, 0.657866, 0, 0.728061, 0, -0.0418905, 48.856, -6.88497, -18.0511 )
+
+[node name="FPS" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+script = ExtResource( 4 )
