@@ -1,17 +1,9 @@
 extends KinematicBody
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var velocity = Vector3.ZERO
 
 export var camera_momentum = 40
 export var accel = 9
-
-const ray_length = 1000
-
 
 func compute_movement(current_direction, delta):
 	var camera_x = global_transform.basis.x
@@ -42,10 +34,10 @@ func handle_fov_zooming(event):
 		event as InputEventMouseButton
 		if event.pressed:
 			match event.button_index:
-				BUTTON_WHEEL_UP:
+				BUTTON_WHEEL_DOWN:
 					if ($Cam.fov < 90):
 						$Cam.fov = $Cam.fov + 1
-				BUTTON_WHEEL_DOWN:
+				BUTTON_WHEEL_UP:
 					if ($Cam.fov > 20):
 						$Cam.fov = $Cam.fov - 1
 						
@@ -56,17 +48,6 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		get_tree().quit()
 
-
-func _ready():
-	pass
-	
-	
-
 func _physics_process(delta):
-	var velocity = compute_movement(Vector3.ZERO, delta)
-	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if (General.camera_movement_enabled == true):
+		var velocity = compute_movement(Vector3.ZERO, delta)

@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/MetalIcon.png-aea89d1d0f7e01543aa77a021494b6cc.image"
+
+[deps]
+
+source_file="res://Assets/Icons/MetalIcon.png"
+dest_files=[ "res://.import/MetalIcon.png-aea89d1d0f7e01543aa77a021494b6cc.image" ]
+
+[params]
+

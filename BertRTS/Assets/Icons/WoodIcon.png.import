@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/WoodIcon.png-32a2091a5a0a6730261c652bcf6e3caf.image"
+
+[deps]
+
+source_file="res://Assets/Icons/WoodIcon.png"
+dest_files=[ "res://.import/WoodIcon.png-32a2091a5a0a6730261c652bcf6e3caf.image" ]
+
+[params]
+

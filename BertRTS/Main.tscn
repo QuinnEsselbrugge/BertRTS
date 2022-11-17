@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://WorldLogic/World.gd" type="Script" id=2]
 [ext_resource path="res://PlayerLogic/CameraHolder.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Utils/FPS.gd" type="Script" id=4]
 [ext_resource path="res://Assets/wareHouse.gltf" type="PackedScene" id=5]
+[ext_resource path="res://GUI.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 2 )
@@ -22,3 +23,13 @@ transform = Transform( -0.02902, 0, -0.50437, 0, 0.657866, 0, 0.728061, 0, -0.04
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 4 )
+
+[node name="GUI" parent="." instance=ExtResource( 6 )]
+mouse_default_cursor_shape = 0
+
+[node name="BoundingBox" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 2.0
+margin_bottom = 3.0
+color = Color( 0.496739, 0.123901, 0.90625, 0.196078 )

@@ -53,3 +53,16 @@ func get_random_2d_position_in_bounds(var bounds, var rng):
 	var random_z = rng.randf_range(z_bounds[0], z_bounds[2])
 	
 	return Vector3(random_x, 0, random_z)
+	
+func get_entities_in_bounds(var bounds, var entities):
+	var first_point = bounds[0]
+	var second_point = bounds[1]
+	
+	for n in entities.size():
+		var entity_pos = entities[n].transform.origin
+		#TODO : IMPROVE A LOT, MAKE THIS FUNCTION NOT BE CALLED AS MUCH WHEN THE SIGNAL IS EMITTED
+		
+		if (entity_pos.x > first_point.x and entity_pos.z > first_point.z and entity_pos.x < second_point.x and entity_pos.z < second_point.z):
+			print(entities[n])
+	
+	

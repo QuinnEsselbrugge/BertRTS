@@ -11,7 +11,14 @@ config_version=4
 [application]
 
 config/name="BertRTS"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+ResourceVariables="*res://Globals/ResourceVariables.gd"
+UiDefinitions="*res://Globals/UiDefinitions.gd"
+General="*res://Globals/General.gd"
 
 [gui]
 

@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://Assets/joystix monospace.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 23
+outline_size = 2
+font_data = SubResource( 1 )
+
+[resource]
+/colors/TextColor = Color( 0.109804, 0.101961, 0.101961, 1 )
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+Label/colors/font_color_shadow = Color( 1, 1, 1, 0 )
+Label/fonts/font = SubResource( 2 )

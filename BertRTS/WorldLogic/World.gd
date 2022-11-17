@@ -9,10 +9,12 @@ onready var worker = preload("res://EntityLogic/EntityScenes/Worker.tscn")
 
 #Utils
 onready var cross = preload("res://Utils/Cross.tscn")
+onready var UIUtils = preload("res://Utils/UIUtils.gd")
+
+var ui_utils
 
 #Scripts
-const WorldGenUtils = preload("res://WorldLogic/WorldGenUtils.gd")
-
+const WorldGenUtils = preload("res://WorldLogic/WorldUtils.gd")
 export var map_size_x = 20
 export var map_size_z = 20
 
@@ -21,9 +23,10 @@ var tile_x_size = 10
 var tile_z_size = 10
 var tile_bounds_offset = 1
 
-var all_tiles: Array
-
 # World values
+var all_tiles: Array
+var all_entities: Array
+
 var trees_per_tile = 12
 var forest_chance_per_tile_base = 15
 var forest_chance_per_tile = forest_chance_per_tile_base
@@ -59,7 +62,10 @@ func build_tiles(var tile_amount):
 				x_offset = 0
 
 			new_tile.global_translation = target_pos
-			new_tile.noise_val = noise.get_noise_2d(float(target_pos.x + OS.get_time().second), float(target_pos.z) + OS.get_time().second)
+			new_tile.noise_val = noise.get_noise_2d(
+				float(target_pos.x + OS.get_time().second),
+				float(target_pos.z) + OS.get_time().second)
+			
 			new_tile.connect("new_position", self, "_on_New_Position_Received")
 			
 			all_tiles.append(new_tile)
@@ -88,6 +94,7 @@ func try_create_forest(var chance, var tile):
 		)
 		
 		add_child(new_tree)
+		all_entities.append(new_tree)
 		
 	if (forest_chance_per_tile == forest_chance_per_tile_base):
 		forest_chance_per_tile = 80
@@ -122,6 +129,8 @@ func build_world():
 	build_tiles(tile_amount)
 	build_noised_biomes()
 
+func setup_resources():
+	ui_utils.setup_ui($GUI)
 	
 func _ready():
 	
@@ -129,8 +138,21 @@ func _ready():
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8	
+	ui_utils = UIUtils.new()
+
+	build_world()
+	setup_resources()
 	
-	build_world();
+
+func _process(delta):
+	ui_utils.run_bounding_box_check($BoundingBox, get_viewport().get_mouse_position())
+	
+	if (General.bounding_box_selected == true):
+		var utils = WorldGenUtils.new()
+		utils.get_entities_in_bounds(General.bounding_box_selected_bounds, all_entities)
+		
+		General.camera_movement_enabled = true
+		General.bounding_box_selected = false
 
 func _worker_Selected(pos, worker):
 	currently_selected = worker
@@ -141,18 +163,21 @@ func _on_New_Position_Received(pos):
 	new_cross.get_node("ClickPlayer").play("Exist")
 
 	add_child(new_cross)
-
+	
+	ui_utils.set_bounding_box_pos($BoundingBox, get_viewport().get_mouse_position(), pos)
 	var new_worker = worker.instance()
 
 	var target_tile = all_tiles[0]
-	
+
 	new_worker.transform.origin = target_tile.global_transform.origin
 	new_worker.connect("worker_selected", self, "_worker_Selected")
-	
+
 	add_child(new_worker)
-	
+	all_entities.append(new_worker)
+
 	new_worker.move(pos)
 
+#func _on_New_BoundingBounds_Received(bounds):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
