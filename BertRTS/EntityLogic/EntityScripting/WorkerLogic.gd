@@ -51,8 +51,6 @@ func _physics_process(delta):
 func _ready():
 	pass # Replace with function body.
 
-
-
 func _on_Worker_input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
 		emit_signal("worker_selected", position, self)

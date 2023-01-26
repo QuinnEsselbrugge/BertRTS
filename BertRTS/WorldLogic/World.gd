@@ -10,7 +10,6 @@ onready var worker = preload("res://EntityLogic/EntityScenes/Worker.tscn")
 #Utils
 onready var cross = preload("res://Utils/Cross.tscn")
 onready var UIUtils = preload("res://Utils/UIUtils.gd")
-
 var ui_utils
 
 #Scripts
@@ -40,7 +39,6 @@ var currently_selected = false
 var noise = OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 
-
 func build_tiles(var tile_amount):
 		
 		var utils = WorldGenUtils.new()
@@ -66,7 +64,7 @@ func build_tiles(var tile_amount):
 				float(target_pos.x + OS.get_time().second),
 				float(target_pos.z) + OS.get_time().second)
 			
-			new_tile.connect("new_position", self, "_on_New_Position_Received")
+			new_tile.connect("new_position", self, "on_tile_click")
 			
 			all_tiles.append(new_tile)
 			
@@ -129,56 +127,70 @@ func build_world():
 	build_tiles(tile_amount)
 	build_noised_biomes()
 
-func setup_resources():
-	ui_utils.setup_ui($GUI)
-	
-func _ready():
-	
+func setup_noise():
 	noise.seed = randi()
 	noise.octaves = 4
 	noise.period = 20.0
 	noise.persistence = 0.8	
+
+func setup_resources():
 	ui_utils = UIUtils.new()
+	ui_utils.setup_ui($GUI)
+
+func _ready():
+	setup_noise()
 
 	build_world()
 	setup_resources()
 	
-
-func _process(delta):
-	ui_utils.run_bounding_box_check($BoundingBox, get_viewport().get_mouse_position())
-	
-	if (General.bounding_box_selected == true):
-		var utils = WorldGenUtils.new()
-		utils.get_entities_in_bounds(General.bounding_box_selected_bounds, all_entities)
-		
-		General.camera_movement_enabled = true
-		General.bounding_box_selected = false
-
-func _worker_Selected(pos, worker):
-	currently_selected = worker
-
-func _on_New_Position_Received(pos):
-	var new_cross = cross.instance()
-	new_cross.transform.origin = pos
-	new_cross.get_node("ClickPlayer").play("Exist")
-
-	add_child(new_cross)
-	
-	ui_utils.set_bounding_box_pos($BoundingBox, get_viewport().get_mouse_position(), pos)
 	var new_worker = worker.instance()
-
-	var target_tile = all_tiles[0]
+	var target_tile = all_tiles[1]
 
 	new_worker.transform.origin = target_tile.global_transform.origin
 	new_worker.connect("worker_selected", self, "_worker_Selected")
 
 	add_child(new_worker)
 	all_entities.append(new_worker)
+	
+	
+# Processes and triggers
 
-	new_worker.move(pos)
+func check_bounding_box():
+	ui_utils.run_bounding_box_check($BoundingBox, get_viewport().get_mouse_position())
+	
+	if (General.bounding_box_selected == true):
+		var utils = WorldGenUtils.new()
+		
+		General.all_selected_entities = utils.get_entities_in_bounds(General.bounding_box_selected_bounds, all_entities)
+		
+		General.camera_movement_enabled = true
+		General.bounding_box_selected = false
+
+func _process(delta):
+	check_bounding_box()
+
+func _worker_Selected(pos, worker):
+	General.all_selected_entities.append(worker)
+
+func play_cross(pos):
+	var new_cross = cross.instance()
+	new_cross.transform.origin = pos
+	new_cross.get_node("ClickPlayer").play("Exist")
+
+	add_child(new_cross)
+
+func on_tile_click(pos):
+	play_cross(pos)
+	
+	ui_utils.set_bounding_box_pos($BoundingBox, get_viewport().get_mouse_position(), pos)
+
+	for n in General.all_selected_entities.size():
+		var entity = General.all_selected_entities[n]
+		
+		if (entity is KinematicBody):
+			entity.move(pos)
+	
+
+#	new_worker.move(pos)
 
 #func _on_New_BoundingBounds_Received(bounds):
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

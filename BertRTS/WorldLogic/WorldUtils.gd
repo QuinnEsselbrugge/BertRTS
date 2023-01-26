@@ -9,7 +9,6 @@ func generate_randomly_positioned_element(var tile, var element, var scale):
 	var random_position_in_bounds = get_random_2d_position_in_bounds(tile.bounds, rng) # VECTOR 3
 	target_rotation.y = rng.randf_range(-180, 180)
 	
-	
 	element.translation = random_position_in_bounds
 	element.rotation = target_rotation
 	element.scale = scale
@@ -38,7 +37,6 @@ func set_tile_bounds(var tile, var tile_x_size, var tile_z_size, tile_bounds_off
 		 tile_x_size - tile_bounds_offset,
 		 tile_z_size - tile_bounds_offset
 	) # ORDER : LEFT TO RIGHT, TOP TO BOTTOM
-	
 
 	tile.bounds = tile_bounds
 	
@@ -58,11 +56,23 @@ func get_entities_in_bounds(var bounds, var entities):
 	var first_point = bounds[0]
 	var second_point = bounds[1]
 	
+	var found_entities: Array
+
 	for n in entities.size():
 		var entity_pos = entities[n].transform.origin
 		#TODO : IMPROVE A LOT, MAKE THIS FUNCTION NOT BE CALLED AS MUCH WHEN THE SIGNAL IS EMITTED
 		
 		if (entity_pos.x > first_point.x and entity_pos.z > first_point.z and entity_pos.x < second_point.x and entity_pos.z < second_point.z):
-			print(entities[n])
+			found_entities.append(entities[n]);
+			
+		if (entity_pos.x < first_point.x and entity_pos.z < first_point.z and entity_pos.x > second_point.x and entity_pos.z > second_point.z):
+			found_entities.append(entities[n]);
+
+		if (entity_pos.x < first_point.x and entity_pos.z < first_point.z and entity_pos.x > second_point.x and entity_pos.z > second_point.z):
+			found_entities.append(entities[n]);
+	
+	return found_entities
+
+	
 	
 	

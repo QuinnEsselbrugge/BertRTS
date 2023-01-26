@@ -1,15 +1,32 @@
-[gd_resource type="Theme" load_steps=3 format=2]
+[gd_resource type="Theme" load_steps=4 format=2]
 
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://Assets/joystix monospace.ttf"
+[ext_resource path="res://Assets/joystix monospace.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=3]
+size = 17
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 23
 outline_size = 2
-font_data = SubResource( 1 )
+font_data = ExtResource( 1 )
 
 [resource]
 /colors/TextColor = Color( 0.109804, 0.101961, 0.101961, 1 )
+ItemList/colors/font_color = Color( 0.63, 0.63, 0.63, 1 )
+ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = SubResource( 3 )
+ItemList/styles/bg = null
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
 Label/colors/font_color = Color( 0, 0, 0, 1 )
 Label/colors/font_color_shadow = Color( 1, 1, 1, 0 )
 Label/fonts/font = SubResource( 2 )

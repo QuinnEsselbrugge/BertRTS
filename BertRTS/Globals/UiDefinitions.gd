@@ -6,3 +6,7 @@ var ui_dict = {
 	"FoodLabel": "HSplitContainer/GameInfo/GameStats/Container/FoodContainer/FoodLabel",
 	"BoundingBox": "/root/Main/BoundingBox",
 }
+
+var building_list =  [
+	"Troop Builder",
+]

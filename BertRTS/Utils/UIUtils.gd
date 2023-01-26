@@ -20,7 +20,15 @@ func setup_ui(gui_node):
 	
 	wood_label.text = ResourceVariables.wood as String
 	metal_label.text = ResourceVariables.metal as String
-	food_label.text = ResourceVariables.food as String
+	food_label.text = ResourceVariables.food as String 	
+	
+	var length = UiDefinitions.building_list.size()
+	var building_list = gui.get_node("HSplitContainer/GameContext/BuildingList") as ItemList
+	
+	for n in length:
+		building_list.add_item(UiDefinitions.building_list[n])
+		
+	
 
 func set_bounding_box_pos(box, init_viewport_pos, in_game_pos):
 	bounding_box_ingame_start_pos = in_game_pos
@@ -70,10 +78,3 @@ func run_bounding_box_check(box, viewport_mouse_pos):
 		
 	bounding_box.rect_size.x = 0
 	bounding_box.rect_size.y = 0
-			
-#		if (val_x > 0 and val_y < 0):
-#			bounding_box.rect_rotation = 180
-#
-#		if (val_x > 0 and val_y < 0):
-#			bounding_box.rect_rotation = 180
-	
