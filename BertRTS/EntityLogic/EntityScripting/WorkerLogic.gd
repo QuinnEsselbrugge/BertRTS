@@ -2,6 +2,7 @@ extends KinematicBody
 
 # Exported speed var for use in editor
 export var speed = float(3.2)
+export var type = "Worker"
 
 # Worker selected
 signal worker_selected(position)
@@ -21,6 +22,9 @@ var step_x = 0
 var step_z = 0
 
 func move(var pos):
+	time_spent_moving = 0
+	move_duration = 0
+	
 	target_pos = pos
 	calculate_movement_values(speed, target_pos)
 	look_at_from_position(transform.origin, target_pos, Vector3.UP)

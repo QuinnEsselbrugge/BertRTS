@@ -14,7 +14,17 @@ func generate_randomly_positioned_element(var tile, var element, var scale):
 	element.scale = scale
 	
 	return element
-		
+	
+func generate_positioned_element(var element, var pos, var scale):
+	var target_rotation = Vector3.ZERO
+	target_rotation.y = rng.randf_range(-180, 180)
+	
+	element.translation = pos
+	element.rotation = target_rotation
+	element.scale = scale
+	
+	return element
+	
 
 func get_tile_bounds(var tile_center, var tile_x_size, var tile_z_size):
 	var bounds = [] # TOP LEFT, TOP RIGHT, BOTTOM LEFT, BOTTOM RIGHT

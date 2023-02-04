@@ -36,10 +36,10 @@ func handle_fov_zooming(event):
 			match event.button_index:
 				BUTTON_WHEEL_DOWN:
 					if ($Cam.fov < 90):
-						$Cam.fov = $Cam.fov + 1
+						$Cam.fov = $Cam.fov + 2
 				BUTTON_WHEEL_UP:
 					if ($Cam.fov > 20):
-						$Cam.fov = $Cam.fov - 1
+						$Cam.fov = $Cam.fov - 2
 						
 func _input(event : InputEvent) -> void:
 	handle_fov_zooming(event)

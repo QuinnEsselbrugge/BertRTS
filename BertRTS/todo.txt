@@ -1,0 +1,11 @@
+BertRTS TODO:
+
+	Placing of buildings,
+		Create context menu on right click?
+	Combat vs,
+	Improve world generation,
+	Improve main script logic and structure,
+	Main menu?,
+	Pathfinding instead of a to b
+	Resource gathering
+	

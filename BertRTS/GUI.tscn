@@ -56,6 +56,13 @@ margin_bottom = 221.0
 mouse_filter = 2
 size_flags_vertical = 3
 
+[node name="SelectedLabel" type="Label" parent="HSplitContainer/GameInfo/Control"]
+margin_left = 2.0
+margin_top = 8.0
+margin_right = 61.0
+margin_bottom = 22.0
+theme = ExtResource( 2 )
+
 [node name="Control2" type="Control" parent="HSplitContainer/GameInfo"]
 margin_top = 225.0
 margin_right = 778.0

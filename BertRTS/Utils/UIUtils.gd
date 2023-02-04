@@ -1,10 +1,5 @@
 extends Node
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var gui
 var main_node
 
@@ -28,8 +23,6 @@ func setup_ui(gui_node):
 	for n in length:
 		building_list.add_item(UiDefinitions.building_list[n])
 		
-	
-
 func set_bounding_box_pos(box, init_viewport_pos, in_game_pos):
 	bounding_box_ingame_start_pos = in_game_pos
 	bounding_box_viewport_start_pos = init_viewport_pos
@@ -42,6 +35,7 @@ func set_bounding_box_pos(box, init_viewport_pos, in_game_pos):
 
 func run_bounding_box_check(box, viewport_mouse_pos):
 	var bounding_box = box as ColorRect
+	
 	if (General.left_mouse_down == true):
 		General.camera_movement_enabled = false
 		
@@ -78,3 +72,18 @@ func run_bounding_box_check(box, viewport_mouse_pos):
 		
 	bounding_box.rect_size.x = 0
 	bounding_box.rect_size.y = 0
+
+func get_selected_item_building_list(gui):
+	var list = gui.get_node(UiDefinitions.ui_dict["BuildingList"]) as ItemList
+	
+	if (list.is_anything_selected()):
+		var selected = list.get_selected_items()
+		var text = list.get_item_text(selected[0])
+		
+		return General.asset_list[text]
+		
+	return ""
+
+func update_selected_label(gui, val):
+	var selected_label = gui.get_node(UiDefinitions.ui_dict["SelectedLabel"])
+	selected_label.text = "Selected: " + val as String
