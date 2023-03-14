@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://default_env.tres" type="Environment" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://PlayerLogic/CameraHolder.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Utils/FPS.gd" type="Script" id=4]
+[ext_resource path="res://Assets/GUI.tres" type="Theme" id=5]
 [ext_resource path="res://GUI.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Spatial"]
@@ -35,3 +36,36 @@ margin_top = 3.0
 margin_right = 2.0
 margin_bottom = 3.0
 color = Color( 0.496739, 0.123901, 0.90625, 0.196078 )
+
+[node name="ContextMenu" type="VBoxContainer" parent="."]
+visible = false
+margin_right = 101.0
+margin_bottom = 121.0
+
+[node name="Panel" type="Panel" parent="ContextMenu"]
+margin_right = 101.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Build" type="Button" parent="ContextMenu/Panel"]
+margin_top = 1.0
+margin_right = 100.0
+margin_bottom = 31.0
+theme = ExtResource( 5 )
+text = "Build"
+
+[node name="Gather" type="Button" parent="ContextMenu/Panel"]
+margin_top = 30.0
+margin_right = 100.0
+margin_bottom = 60.0
+theme = ExtResource( 5 )
+text = "Gather"
+
+[node name="Attack" type="Button" parent="ContextMenu/Panel"]
+margin_top = 60.0
+margin_right = 100.0
+margin_bottom = 90.0
+rect_pivot_offset = Vector2( -117, 8 )
+theme = ExtResource( 5 )
+text = "Attack"

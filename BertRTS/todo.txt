@@ -4,7 +4,7 @@ BertRTS TODO:
 		Create context menu on right click?
 	Combat vs,
 	Improve world generation,
-	Improve main script logic and structure,
+	Improve main script logic and structure, X
 	Main menu?,
 	Pathfinding instead of a to b
 	Resource gathering

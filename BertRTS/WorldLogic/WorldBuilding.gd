@@ -1,11 +1,13 @@
 extends Node
 
-
-var worldgen_utils
+var WorldGenUtils = load("res://WorldLogic/WorldUtils.gd")
 
 #World
 var tile = preload("res://WorldLogic/Tile.tscn") 
-var tree = preload("res://Assets/TWEEEEE.gltf")
+var tree = preload("res://Assets/Tree.tscn")
+
+var world_interaction
+var worldgen_utils
 
 export var map_size_x = 20
 export var map_size_z = 20
@@ -20,21 +22,19 @@ var forest_chance_per_tile_base = 15
 var forest_chance_per_tile = forest_chance_per_tile_base
 
 var tree_scale = Vector3(0.219, 0.224, 0.187) #x y z
-var warehouse_scale = Vector3(0.113, 0.15, 0.1)
 
 # End world values
 var noise = OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 
-func init_building(worldgenUtils):
-	worldgen_utils = worldgenUtils
-
+func init_building():
+	worldgen_utils = WorldGenUtils.new()
 
 func setup_noise():
 	noise.seed = randi()
-	noise.octaves = 4
-	noise.period = 20.0
-	noise.persistence = 0.8	
+	noise.octaves = 25
+	noise.period = 125
+	noise.persistence = 1.2
 
 func build_tiles(tile_amount, scene):
 		var x_offset = 0
@@ -58,8 +58,8 @@ func build_tiles(tile_amount, scene):
 				float(target_pos.x + OS.get_time().second),
 				float(target_pos.z) + OS.get_time().second)
 			
-			new_tile.connect("new_position", self, "on_tile_click")
-			new_tile.connect("new_interaction", self, "on_tile_interact")
+			new_tile.connect("new_position", world_interaction, "on_tile_click")
+			new_tile.connect("new_interaction", world_interaction, "on_tile_interact")
 			
 			General.all_tiles.append(new_tile)
 			
@@ -85,6 +85,9 @@ func try_create_forest(chance, tile, scene):
 		 add_tree,
 		 tree_scale
 		)
+		
+		tile.tile_type = "Forest"
+		tile.resource_tile = true
 		
 		scene.add_child(new_tree)
 		General.all_entities.append(new_tree)
@@ -119,7 +122,9 @@ func build_noised_biomes(scene):
 		
 		General.all_tiles[n].set_tile_color()
 
-func build_world(scene):
+func build_world(scene, worldInteraction):
+	world_interaction = worldInteraction
+	
 	build_tiles(tile_amount, scene)
 	build_noised_biomes(scene)
 

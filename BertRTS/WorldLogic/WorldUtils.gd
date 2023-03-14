@@ -82,7 +82,23 @@ func get_entities_in_bounds(var bounds, var entities):
 			found_entities.append(entities[n]);
 	
 	return found_entities
+	
+func can_build(var tile, var building):
+	var cost = General.cost_list[building]
 
+	var wood = ResourceVariables.wood - cost["Wood"]
+	var metal = ResourceVariables.metal - cost["Metal"] 
+	var food = ResourceVariables.food - cost["Food"] 
 	
-	
-	
+	if (!building.empty() 
+		and tile.building_allowed == true
+		and tile.building_present == false
+		and wood >= 0 and metal >= 0 and food >= 0):
+			
+			ResourceVariables.wood = ResourceVariables.wood - cost['Wood']
+			ResourceVariables.metal = ResourceVariables.metal - cost['Metal']
+			ResourceVariables.food = ResourceVariables.food - cost['Food']
+						
+			return true
+
+	return false

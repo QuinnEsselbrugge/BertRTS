@@ -1,7 +1,7 @@
 extends KinematicBody
 
 # Exported speed var for use in editor
-export var speed = float(3.2)
+export var speed = float(30)
 export var type = "Worker"
 
 # Worker selected

@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 transform = Transform( 0.0726465, 0, 0, 0, 0.0653769, 0, 0, 0, 0.0863489, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 0.302512, 0, 0, 0, -1.88705e-08, 0.183604, 0, -0.431707, -8.02557e-09, 0, 0.373206, -4.46305e-09 )
+transform = Transform( 0.519356, 0, 0, 0, -3.23971e-08, 0.315213, 0, -0.74116, -1.37784e-08, 0, 0.373206, -4.46305e-09 )
 shape = SubResource( 1 )
 
 [connection signal="input_event" from="." to="." method="_on_Worker_input_event"]

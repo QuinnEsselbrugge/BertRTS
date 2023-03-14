@@ -15,13 +15,20 @@ var all_selected_entities: Array
 var all_entities: Array
 var all_tiles: Array
 
+var currently_selected_tile
+var currently_selected_pos
+
 var color_dict = {
 	"Grass": Color( 0, 0.392157, 0, 1 ),
-	"Forest": Color( 0.133333, 0.545098, 0.133333, 1 ),
+	"Forest": Color( 0, 0.37999, 0, 1 ),
 	"Water": Color( 0, 0, 1, 1 )
 }
 
 var asset_list = {
 	"Warehouse": "res://Assets/wareHouse.gltf",
 	"Tree": "res://Assets/TWEEEEE.gltf",
+}
+
+var cost_list = {
+	"Warehouse": {"Wood": 1, "Metal": 0, "Food": 0},
 }

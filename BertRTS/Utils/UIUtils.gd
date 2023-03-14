@@ -1,12 +1,16 @@
 extends Node
 
+onready var WorldInteraction = load("res://WorldLogic/WorldInteraction.gd")
+
 var gui
 var main_node
+var world_interaction
 
 var bounding_box_ingame_start_pos = Vector3.ZERO
 var bounding_box_viewport_start_pos = Vector2.ZERO
 
-func setup_ui(gui_node):
+func setup_ui(gui_node, context_menu, worldInteraction):
+	world_interaction = worldInteraction
 	gui = gui_node
 
 	var wood_label = gui.get_node(UiDefinitions.ui_dict["WoodLabel"])
@@ -22,6 +26,12 @@ func setup_ui(gui_node):
 	
 	for n in length:
 		building_list.add_item(UiDefinitions.building_list[n])
+	#TODO: Implement uses of the buttons
+	
+	var button_build = context_menu.get_node("Panel/Build") as Button
+	button_build.connect("pressed", self, "_button_build_pressed")
+
+
 		
 func set_bounding_box_pos(box, init_viewport_pos, in_game_pos):
 	bounding_box_ingame_start_pos = in_game_pos
@@ -80,10 +90,23 @@ func get_selected_item_building_list(gui):
 		var selected = list.get_selected_items()
 		var text = list.get_item_text(selected[0])
 		
-		return General.asset_list[text]
+		return text
 		
 	return ""
-
+	
 func update_selected_label(gui, val):
 	var selected_label = gui.get_node(UiDefinitions.ui_dict["SelectedLabel"])
 	selected_label.text = "Selected: " + val as String
+
+
+func update_material_labels(GUI):
+	var wood_label = GUI.get_node(UiDefinitions.ui_dict["WoodLabel"])
+	var metal_label = GUI.get_node(UiDefinitions.ui_dict["MetalLabel"])
+	var food_label = GUI.get_node(UiDefinitions.ui_dict["FoodLabel"])
+	
+	wood_label.text = ResourceVariables.wood as String
+	metal_label.text = ResourceVariables.metal as String
+	food_label.text = ResourceVariables.food as String
+	
+func _button_build_pressed():
+	world_interaction.build_selected()

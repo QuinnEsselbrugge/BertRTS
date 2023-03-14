@@ -7,6 +7,7 @@ var ui_dict = {
 	"BuildingList": "HSplitContainer/GameContext/BuildingList",
 	"SelectedLabel": "HSplitContainer/GameInfo/Control/SelectedLabel",
 	"BoundingBox": "/root/Main/BoundingBox",
+	"ContextMenu": "/root/main/ContextMenu",
 }
 
 # Same ordering

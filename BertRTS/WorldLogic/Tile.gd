@@ -2,9 +2,10 @@ extends Spatial
 
 onready var WaterShader = preload("res://Shaders/Water.gdshader")
 
-export var tile_type = "Grass" #def
+export var tile_type = "Grass" #std def
 export var noise_val = 0
 export var building_allowed = false
+export var resource_tile = false
 export var building_present = false
 export var bounds = [Vector3(), Vector3()]
 
