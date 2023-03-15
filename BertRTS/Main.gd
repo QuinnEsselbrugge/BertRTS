@@ -41,5 +41,5 @@ func _ready():
 	add_child(new_worker)
 	General.all_entities.append(new_worker)
 	
-func _process(delta):
-	world_interaction.check_ui_updates($BoundingBox)
+#func _process(delta):
+	#world_interaction.check_ui_updates($BoundingBox)

@@ -114,7 +114,7 @@ func build_noised_biomes(scene):
 			General.all_tiles[n].tile_type = "Grass"
 			General.all_tiles[n].building_allowed = true
 			
-			try_create_forest(random_forest_chance, General.all_tiles[n], scene)
+			#try_create_forest(random_forest_chance, General.all_tiles[n], scene)
 			
 		if (noise_val >= 0):
 			General.all_tiles[n].tile_type = "Water"
